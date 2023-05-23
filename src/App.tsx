@@ -1,11 +1,24 @@
 import React from 'react';
 
-const App = () => {
-  return (
-    <div >
+import Button, { ButtonTypes } from './components/Button';
 
-    </div>
-  );
+const App = () => {
+    return (
+        <div >
+            <Button
+                disabled
+                type={ButtonTypes.Primary}
+                title={'Primary'}
+                onClick={() => { alert('Primary')}} />
+
+            <Button
+                type={ButtonTypes.Secondary}
+                title={'Secondary'}
+                onClick={() => { }} />
+
+            <Button type={ButtonTypes.Error} title={'Error'} onClick={() => { }} />
+        </div>
+    );
 }
 
 export default App;
