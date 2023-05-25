@@ -1,0 +1,1 @@
+export { default, TabsTypes } from './Tabs'

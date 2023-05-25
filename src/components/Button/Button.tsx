@@ -1,7 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-
 import classNames from 'classnames';
-
 import styles from './Button.module.scss'
 
 export enum ButtonTypes {
