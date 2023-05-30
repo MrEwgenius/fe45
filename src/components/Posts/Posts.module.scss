@@ -18,22 +18,21 @@
     }
     max-width: 736px;
     gap: 32px;
-    .headerPosts {
+    .postWrap {
         display: flex;
         justify-content: space-between;
-        div {
+        .postContainer {
             max-width: 448px;
             margin-bottom: 33px;
         }
 
-        img {
+        .postImg {
             width: 256px;
             height: 244px;
             object-fit: cover;
         }
 
-        span {
-            display: block;
+        .postDate {
             font-family: "Inter";
             font-style: normal;
             font-size: 16px;
@@ -42,7 +41,7 @@
             margin-bottom: 8px;
         }
 
-        h1 {
+        .postTitle {
             font-family: "Inter";
             font-weight: 700;
             font-size: 32px;
@@ -55,7 +54,7 @@
                 color: $primary;
             }
         }
-        p {
+        .postText{
             font-family: "Inter";
             font-weight: 400;
             font-size: 16px;
@@ -63,7 +62,7 @@
             color: $gray;
         }
     }
-    .footerPosts {
+    .iconContainerWrap {
         display: flex;
         justify-content: space-between;
     }
@@ -88,23 +87,22 @@
         background-color: $medium;
     }
     max-width: 352px;
-    .headerPosts {
+    .postWrap {
         display: flex;
         flex-direction: column-reverse;
         margin-bottom: 30px;
-        div {
+        .postContainer {
             max-width: 448px;
         }
 
-        img {
+        .postImg {
             width: 352px;
             height: 246px;
             object-fit: cover;
             margin-bottom: 24px;
         }
 
-        span {
-            display: block;
+        .postDate {
             font-family: "Inter";
             font-size: 16px;
             line-height: 24px;
@@ -112,7 +110,7 @@
             margin-bottom: 8px;
         }
 
-        h1 {
+        .postTitle {
             font-family: "Inter";
             font-weight: 600;
             font-size: 18px;
@@ -124,11 +122,8 @@
                 color: $primary;
             }
         }
-        p {
-            display: none;
-        }
     }
-    .footerPosts {
+    .iconContainerWrap {
         display: flex;
         justify-content: space-between;
     }
@@ -152,22 +147,21 @@
         background-color: $medium;
     }
     max-width: 352px;
-    .headerPosts {
+    .postWrap {
         display: flex;
         justify-content: space-between;
         margin-bottom: 25px;
-        div {
+        .postContainer {
             max-width: 448px;
         }
 
-        img {
+        .postImg {
             width: 96px;
             height: 96px;
             object-fit: cover;
         }
 
-        span {
-            display: block;
+        .postDate {
             font-family: "Inter";
             font-size: 16px;
             line-height: 24px;
@@ -175,7 +169,7 @@
             margin-bottom: 8px;
         }
 
-        h1 {
+        .postTitle {
             font-family: "Inter";
             font-weight: 600;
             font-size: 18px;
@@ -187,11 +181,8 @@
                 color: $primary;
             }
         }
-        p {
-            display: none;
-        }
     }
-    .footerPosts {
+    .iconContainerWrap {
         display: flex;
         justify-content: space-between;
     }

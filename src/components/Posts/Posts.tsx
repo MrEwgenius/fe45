@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styles from './Posts.module.scss'
-import LikeIcons from '../../assets/icons/LikeIcons/LikeIcon';
-import DislikeIcon from '../../assets/icons/DislikeIcons/DislikeIcon';
-import Bookmark from '../../assets/icons/Bookmark/Bookmark';
-import MoreHorizontal from '../../assets/icons/MoreHorizontal/MoreHorizontal';
+import LikeIcons from '../../assets/icons/LikeIcons';
+import DislikeIcon from '../../assets/icons/DislikeIcons';
+import Bookmark from '../../assets/icons/Bookmark';
+import MoreHorizontal from '../../assets/icons/MoreHorizontal';
 import classNames from 'classnames';
 
 export enum PostsTypes {
@@ -24,33 +24,39 @@ type PostsProps = {
 
 
 
-const Posts: FC<PostsProps> = ({ title, id, date, text, image }) => {
+const Posts: FC<PostsProps> = ({
+    title,
+    id,
+    date,
+    text,
+    image,
+}) => {
 
     const postsStyle = styles[id]
 
 
 
     return (
-        <div>
-            <div className={classNames(postsStyle)}>
-                <div className={styles.headerPosts}>
-                    <div>
-                        <span>{date}</span>
-                        <h1>{title}</h1>
-                        <p>{text}</p>
-                    </div>
-                    <img src={image} alt="image" />
-
+        <div className={classNames(postsStyle)}>
+            <div className={styles.postWrap}>
+                <div className={styles.postContainer}>
+                    <div className={styles.postDate}>{date}</div>
+                    <div className={styles.postTitle}>{title}</div>
+                    {id === PostsTypes.Large && (
+                        <div className={styles.postText}>{text}</div>
+                    )}
                 </div>
-                <div className={styles.footerPosts}>
-                    <div className={styles.likeDislikeContainer}>
-                        <LikeIcons />
-                        <DislikeIcon />
-                    </div>
-                    <div className={styles.bookmarkMoreHorizontalContainer}>
-                        <Bookmark />
-                        <MoreHorizontal />
-                    </div>
+                <img className={styles.postImg} src={image} alt="image" />
+
+            </div>
+            <div className={styles.iconContainerWrap}>
+                <div className={styles.likeDislikeContainer}>
+                    <LikeIcons />
+                    <DislikeIcon />
+                </div>
+                <div className={styles.bookmarkMoreHorizontalContainer}>
+                    <Bookmark />
+                    <MoreHorizontal />
                 </div>
             </div>
         </div>
