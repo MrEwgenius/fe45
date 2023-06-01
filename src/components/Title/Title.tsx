@@ -5,15 +5,17 @@ import classNames from 'classnames';
 import styles from './Title.module.scss'
 
 type TitleProps = {
-    title: string;
+    title: any;
     onClick?: () => void;
+    className?: any;
 
 }
 
-const Title: FC<TitleProps> = ({ title }) => {
+const Title: FC<TitleProps> = ({ title, className }) => {
     return (
         <div
-            className={styles.title}
+            className={classNames(styles.title, className)}
+
         >
             {title}
         </div>

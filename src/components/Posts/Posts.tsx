@@ -13,7 +13,8 @@ export enum PostsTypes {
 
 }
 type PostsProps = {
-    id: PostsTypes,
+    type: PostsTypes,
+    id?: number,
     image?: string,
     text?: string,
     date?: string,
@@ -25,6 +26,7 @@ type PostsProps = {
 
 
 const Posts: FC<PostsProps> = ({
+    type,
     title,
     id,
     date,
@@ -32,7 +34,7 @@ const Posts: FC<PostsProps> = ({
     image,
 }) => {
 
-    const postsStyle = styles[id]
+    const postsStyle = styles[type]
 
 
 
@@ -42,7 +44,7 @@ const Posts: FC<PostsProps> = ({
                 <div className={styles.postContainer}>
                     <div className={styles.postDate}>{date}</div>
                     <div className={styles.postTitle}>{title}</div>
-                    {id === PostsTypes.Large && (
+                    {type === PostsTypes.Large && (
                         <div className={styles.postText}>{text}</div>
                     )}
                 </div>

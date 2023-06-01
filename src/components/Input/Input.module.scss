@@ -1,5 +1,6 @@
 @import "src/styles/colors";
 
+
 .input {
   padding: 18px 20px;
   background-color: $white;
@@ -9,9 +10,10 @@
   font-size: 16px;
   line-height: 20px;
   color: $secondary;
-  min-width: 544px;
   border-radius: 4px;
   resize: none;
+  width: 100%;
+
   &:hover,
   &:focus {
     border-color: $medium;
