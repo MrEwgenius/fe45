@@ -1,14 +1,21 @@
 import * as React from 'react';
-import styles from './MoreHorizontal.module.scss'
 
-const MoreHorizontal = ({
+import { Theme } from 'src/@types';
+import { useThemeContext } from 'src/context/Theme';
+
+export const MoreHorizontal = ({
     width = "20",
     height = "4",
     fill = "#313037",
 }
 ) => {
+    const { themeValue } = useThemeContext();
+    if (themeValue === Theme.Dark) {
+        fill = 'white'
+
+    }
     return (
-        <svg className={styles.morehorizontal}
+        <svg
             width={width}
             height={height}
             viewBox="0 0 20 4"
@@ -22,5 +29,3 @@ const MoreHorizontal = ({
 
     );
 }
-
-export default MoreHorizontal;

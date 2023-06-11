@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FormPagesContainer from '../../components/FormPagesContainer/FormPagesContainer';
 import styles from "./SignIn.module.scss";
 import Input from '../../components/Input/Input';
+import { useThemeContext } from 'src/context/Theme';
+import classNames from 'classnames';
+import { Theme } from 'src/@types';
 
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { themeValue } = useThemeContext();
 
     return (
         <div>
@@ -34,7 +38,7 @@ const SignIn = () => {
                         onChange={setPassword}
                         value={password}
                     />
-                    <div className={styles.forgotPasword}>Forgot password?</div>
+                    <div className={classNames(styles.forgotPasword, { [styles.darkForgotPasword]: themeValue === Theme.Dark })}>Forgot password?</div>
                 </div>
 
             </FormPagesContainer>

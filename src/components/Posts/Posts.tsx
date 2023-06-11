@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
-import styles from './Posts.module.scss'
-import LikeIcons from '../../assets/icons/LikeIcons';
-import DislikeIcon from '../../assets/icons/DislikeIcons';
-import Bookmark from '../../assets/icons/Bookmark';
-import MoreHorizontal from '../../assets/icons/MoreHorizontal';
 import classNames from 'classnames';
+
+import {
+    LikeIcons, DislikeIcon,
+    Bookmark,
+    MoreHorizontal
+} from 'src/assets/icons';
+import { useThemeContext } from 'src/context/Theme';
+import { Theme } from 'src/@types';
+
+import styles from './Posts.module.scss'
 
 export enum PostsTypes {
     Large = 'large',
@@ -37,11 +42,14 @@ const Posts: FC<PostsProps> = ({
     const postsStyle = styles[type]
 
 
+    const { themeValue } = useThemeContext()
+
+
 
     return (
-        <div className={classNames(postsStyle)}>
+        <div className={classNames(postsStyle, { [styles.darkContainer]: themeValue === Theme.Dark })}>
             <div className={styles.postWrap}>
-                <div className={styles.postContainer}>
+                <div className={classNames(styles.postContainer, { [styles.darkContainer]: themeValue === Theme.Dark })}>
                     <div className={styles.postDate}>{date}</div>
                     <div className={styles.postTitle}>{title}</div>
                     {type === PostsTypes.Large && (

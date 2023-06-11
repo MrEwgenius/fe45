@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 
-import FormPagesContainer from "../../components/FormPagesContainer";
-import Input from "../../components/Input";
+import FormPagesContainer from "src/components/FormPagesContainer";
+import Input from "src/components/Input";
+import { Theme } from "src/@types";
+import { useThemeContext } from "src/context/Theme";
+
 import styles from "./SignUp.module.scss";
 
 const SignUp = () => {
@@ -10,13 +14,16 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const { themeValue } = useThemeContext();
+
     return (
         <FormPagesContainer
             title={"Sign Up"}
             btnTitle={"Sign Up"}
             onSubmit={() => { }}
             additionalInfo={
-                <div className={styles.additionalInfo}>
+                <div className={classNames(styles.additionalInfo,
+                    { [styles.darkAdditionalInfo]: themeValue === Theme.Dark, })}>
                     {"Already have an account?"}
                     <span className={styles.signIn}>Sign In</span>
                 </div>

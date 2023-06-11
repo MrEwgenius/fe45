@@ -1,16 +1,24 @@
 import * as React from 'react';
-import styles from './LikeIcons.module.scss'
+
+import { Theme } from 'src/@types';
+import { useThemeContext } from 'src/context/Theme';
 
 
-const LikeIcons = ({
+
+export const LikeIcons = ({
     width = "22",
     height = "23",
     fill = "#313037"
 
 }) => {
+    const { themeValue } = useThemeContext();
+    if (themeValue === Theme.Dark) {
+        fill = 'white'
+
+    }
 
     return (
-        <svg className={styles.like}
+        <svg
             width={width}
             height={height}
             viewBox="0 0 22 23"
@@ -25,4 +33,3 @@ const LikeIcons = ({
 
     )
 }
-export default LikeIcons

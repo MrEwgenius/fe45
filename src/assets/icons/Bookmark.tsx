@@ -1,13 +1,22 @@
 import * as React from 'react';
-import styles from './Bookmark.module.scss'
 
-const Bookmark = ({
+import { Theme } from 'src/@types';
+import { useThemeContext } from 'src/context/Theme';
+
+export const Bookmark = ({
     width = "16",
     height = "20",
     fill = "#313037",
 }) => {
+    
+    const { themeValue } = useThemeContext();
+    if (themeValue === Theme.Dark) {
+        fill = 'white'
+
+    }
+
     return (
-        <svg className={styles.bookmark}
+        <svg
             width={width}
             height={height}
             viewBox="0 0 16 20"
@@ -23,4 +32,3 @@ const Bookmark = ({
     );
 }
 
-export default Bookmark;

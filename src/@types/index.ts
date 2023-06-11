@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type Post = {
     id: number;
     image: string;
@@ -6,19 +8,24 @@ export type Post = {
     lesson_num?: number;
     title: string;
     author?: number;
-  };
-  export type PostsList = Post[];
-  
-  export enum TabsTypes {
+};
+export type PostsList = Post[];
+
+export enum TabsTypes {
     All = "all",
     MyFavorite = "favourites",
     Popular = "popular",
-  }
-  
-  export type Tab = {
+}
+
+export type Tab = {
     key: TabsTypes;
     title: string;
     disabled: boolean;
-  };
-  export type TabsListType = Tab[];
-  
+};
+export type TabsListType = Tab[];
+
+export type Children = ReactElement | ReactElement[];
+export enum Theme {
+    Light = "light",
+    Dark = "dark",
+}

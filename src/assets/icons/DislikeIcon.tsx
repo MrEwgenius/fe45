@@ -1,14 +1,24 @@
 import React from "react";
-import styles from './DislikeIcons.module.scss'
-const DislikeIcon = ({
+
+import { Theme } from 'src/@types';
+import { useThemeContext } from 'src/context/Theme';
+
+
+export const DislikeIcon = ({
 
     width = "23",
     height = "23",
     fill = "#313037",
 }) => {
+    const { themeValue } = useThemeContext();
+    if (themeValue === Theme.Dark) {
+        fill = 'white'
+
+    }
     return (
 
-        <svg className={styles.dislike}
+
+        <svg
             width={width}
             height={height}
             viewBox="0 0 23 23"
@@ -23,5 +33,3 @@ const DislikeIcon = ({
 
     );
 };
-
-export default DislikeIcon

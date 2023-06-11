@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import styles from './SelectedPost.module.scss'
-import Title from '../../components/Title/Title';
-import LikeIcons from '../../assets/icons/LikeIcons/LikeIcon';
-import DislikeIcon from '../../assets/icons/DislikeIcons/DislikeIcon';
-import Bookmark from '../../assets/icons/Bookmark/Bookmark';
+import Title from 'src/components/Title/Title';
+import { Bookmark, DislikeIcon, LikeIcons } from 'src/assets/icons';
+import { useThemeContext } from 'src/context/Theme';
+import classNames from 'classnames';
+import { Theme } from 'src/@types';
 
 type SelectedPostProps = {
     title?: string,
@@ -20,11 +21,11 @@ const SelectedPost: FC<SelectedPostProps> = ({
     description,
 
 }) => {
-
+    const { themeValue } = useThemeContext();
 
 
     return (
-        <div className={styles.container} >
+        <div className={classNames(styles.container, { [styles.darkContainer]: themeValue === Theme.Dark })} >
             <div className={styles.breadcrumbs}>Home <span className={styles.numberPost}>| Post 14278</span></div>
             <Title
                 className={styles.title}

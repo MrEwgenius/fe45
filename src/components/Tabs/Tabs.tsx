@@ -1,6 +1,12 @@
 import React, { FC, ReactElement } from 'react';
-import styles from './Tabs.module.scss'
+
 import classNames from 'classnames';
+import { useThemeContext } from 'src/context/Theme';
+import { Theme } from 'src/@types';
+
+import styles from './Tabs.module.scss'
+
+
 
 export enum TabsTypes {
     All = 'all',
@@ -25,11 +31,13 @@ const Tabs: FC<TabsProps> = ({
     disabled,
     active,
 }) => {
+    const { themeValue } = useThemeContext();
     const tabsStyle = styles[type]
     return (
         <div
             onClick={!disabled ? onClick : undefined}
             className={classNames(tabsStyle, {
+                [styles.dark]: themeValue === Theme.Dark,
                 [styles.active]: active,
                 [styles.disabled]: disabled
             })}

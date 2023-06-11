@@ -72,3 +72,23 @@
         }
     }
 }
+.darkContainer {
+    background-color: $secondary;
+    .breadcrumbs{
+        color: $white;
+        
+    }
+    .description {
+        color: $white;
+    }
+    .footermenuFlex {
+        .likeIcons,
+        .likeIcons {
+            background-color: $primary-secondary;
+        }
+        .addToFavorites {
+            background-color: $primary-secondary;
+            color: $white;
+        }
+    }
+}

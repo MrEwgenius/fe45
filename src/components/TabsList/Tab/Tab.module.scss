@@ -14,6 +14,8 @@
   }
 }
 
+
+
 .active {
   border-bottom: 2px solid $secondary;
   &:hover {
@@ -27,4 +29,8 @@
     cursor: not-allowed;
     color: $gray;
   }
+}
+
+.dark {
+  color: $white;
 }

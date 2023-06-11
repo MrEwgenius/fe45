@@ -1,10 +1,13 @@
-import {useEffect, useMemo, useState} from "react";
+import { useEffect, useMemo, useState } from "react";
+import classNames from "classnames";
 
-import Title from "../../components/Title";
-import CardsList from "../../components/CardsList";
-import { PostsList, TabsTypes } from "../../@types";
-import TabsList from "../../components/TabsList";
+import Title from "src/components/Title";
+import CardsList from "src/components/CardsList";
+import { PostsList, TabsTypes, Theme } from "src/@types";
+import TabsList from "src/components/TabsList";
+
 import styles from "./Home.module.scss";
+import { useThemeContext } from "src/context/Theme";
 
 const MOCK_ARRAY = [
   {
@@ -182,8 +185,12 @@ const Home = () => {
     }
   };
 
+  const { themeValue } = useThemeContext();
+
   return (
-    <div>
+    <div className={classNames({
+      [styles.darkContainer]: themeValue === Theme.Dark,
+    })}>
       <Title title={"Blog"} className={styles.pageTitle} />
       <TabsList
         tabsList={tabsList}
@@ -191,7 +198,7 @@ const Home = () => {
         onTabClick={onTabClick}
       />
       <CardsList cardsList={cardsList} />
-    </div>
+    </div >
   );
 };
 
