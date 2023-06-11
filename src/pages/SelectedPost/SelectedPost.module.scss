@@ -1,0 +1,94 @@
+@import "/src/styles/colors.scss";
+
+.container {
+    max-width: 992px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    .breadcrumbs {
+        font-family: "Inter";
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: $secondary;
+        .numberPost {
+            font-family: "Inter";
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray;
+        }
+    }
+    .image {
+        width: 992px;
+        height: 518px;
+        object-fit: cover;
+        margin: auto;
+    }
+    .title {
+    }
+
+    .description {
+        max-width: 920px;
+        margin: auto;
+        font-family: "Inter";
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 32px;
+        color: $secondary;
+    }
+    .footermenuFlex {
+        max-width: 920px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+
+        .likeIcons,
+        .likeIcons {
+            cursor: pointer;
+
+            margin-right: 6px;
+            display: flex;
+            display: inline-block;
+            padding: 16px 32px;
+            background-color: $medium;
+            border-radius: 5px;
+        }
+        .addToFavorites {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: "Inter";
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+            background-color: $medium;
+            padding: 16px 32px;
+            color: $secondary;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    }
+}
+.darkContainer {
+    background-color: $secondary;
+    .breadcrumbs{
+        color: $white;
+        
+    }
+    .description {
+        color: $white;
+    }
+    .footermenuFlex {
+        .likeIcons,
+        .likeIcons {
+            background-color: $primary-secondary;
+        }
+        .addToFavorites {
+            background-color: $primary-secondary;
+            color: $white;
+        }
+    }
+}

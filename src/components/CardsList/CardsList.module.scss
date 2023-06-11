@@ -1,0 +1,16 @@
+.cardListcontainer {
+    display: flex;
+    gap: 32px;
+}
+
+.cardListwrap {
+}
+.Small {
+    flex-wrap: wrap;
+}
+.medium {
+    max-width: 740px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+}
