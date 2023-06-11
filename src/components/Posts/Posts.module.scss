@@ -6,8 +6,9 @@
 @import "src/styles/colors.scss";
 
 .large {
+    max-width: 736px;
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     &::after {
         position: absolute;
         margin-top: 40px;
@@ -16,8 +17,7 @@
         height: 1px;
         background-color: $medium;
     }
-    max-width: 736px;
-    gap: 32px;
+    // gap: 32px;
     .postWrap {
         display: flex;
         justify-content: space-between;
@@ -76,10 +76,10 @@
 
 .medium {
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 48px;
     &::after {
         position: absolute;
-        margin-top: 40px;
+        margin-top: 41px;
         content: "";
         width: 100%;
         height: 1px;
@@ -136,10 +136,10 @@
 }
 .small {
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 82px;
     &::after {
         position: absolute;
-        margin-top: 40px;
+        margin-top: 42px;
         content: "";
         width: 100%;
         height: 1px;

@@ -7,13 +7,14 @@ import { Theme } from "src/@types";
 import styles from "./Input.module.scss";
 
 type InputProps = {
-    title: string;
+    title?: string;
     placeholder: string;
     onChange: (value: string) => void;
     value: string;
     disabled?: boolean;
     errorText?: string;
     isTextarea?: boolean;
+    className?:string;
 };
 
 
@@ -30,6 +31,7 @@ const Input = forwardRef<(HTMLInputElement | null) | (LegacyRef<HTMLTextAreaElem
             disabled,
             value,
             isTextarea,
+            className
         } = props
 
         const { themeValue } = useThemeContext();
@@ -44,14 +46,14 @@ const Input = forwardRef<(HTMLInputElement | null) | (LegacyRef<HTMLTextAreaElem
             onChange: onInputChange,
             value,
             placeholder,
-            className: classNames(styles.input, {
+            className: classNames(styles.input,className, {
                 [styles.disabled]: disabled,
                 [styles.errorInput]: errorText,
             }),
         };
 
         return (
-            <div className={classNames(styles.container, {
+            <div className={classNames(styles.container, className, {
                 [styles.darkContainer]: themeValue === Theme.Dark,
             })}>
                 <div className={styles.title}>{title}</div>

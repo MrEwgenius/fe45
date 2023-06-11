@@ -22,6 +22,7 @@ import Tabs from './components/Tabs/Tabs';
 import Tab from './components/TabsList/Tab/Tab';
 import { title } from 'process';
 import RegistrationConfirmation from './pages/RegistrationConfirmation/RegistrationConfirmation';
+import Router from './pages/Router';
 
 
 const App = () => {
@@ -50,7 +51,7 @@ const App = () => {
             <ThemeProvider themeValue={themeValue} onChangeTheme={onChangeTheme}>
                 {/* <SignUp />
                 <SignIn /> */}
-                <ThemeSwitcher />
+                {/* <ThemeSwitcher /> */}
                 {/* <Posts
                     type={PostsTypes.Large}
                     title='Ghbdtn'
@@ -83,12 +84,15 @@ const App = () => {
                     onClick={() => {
                     }}
                 /> */}
-                <TabsList
+                {/* <TabsList
                     tabsList={tabList}
                     activeTab={activeTab}
                     onTabClick={onTabClick}
                 />
-                <RegistrationConfirmation />
+                <RegistrationConfirmation /> */}
+
+
+                <Router />
             </ThemeProvider>
 
 

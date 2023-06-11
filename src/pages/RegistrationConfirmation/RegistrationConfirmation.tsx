@@ -14,9 +14,9 @@ const RegistrationConfirmation = () => {
       btnTitle={"Go to home"}
       onSubmit={() => { }}
     >
-      <div className={classNames({ [styles.darkText]: Theme.Dark })}>
+      <div className={classNames( styles.container,{ [styles.darkText]: Theme.Dark })}>
         {
-          "Please activate your account with the activation link in the email example@gmail.com.\n Please, check your email"
+          "Please activate your account with the activation link in the email example@gmail.com. Please, check your email"
         }
       </div>
     </FormPagesContainer>
