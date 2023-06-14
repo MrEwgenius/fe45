@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import Button, { ButtonTypes } from './components/Button';
 import Title from './components/Title';
 import TabsList from './components/TabsList';
@@ -23,16 +24,25 @@ import Tab from './components/TabsList/Tab/Tab';
 import { title } from 'process';
 import RegistrationConfirmation from './pages/RegistrationConfirmation/RegistrationConfirmation';
 import Router from './pages/Router';
+import { ThemeSelectors, setThemeValue } from './redux/reducers/themeSlice';
+import { RootState } from './redux/store';
 
 
 const App = () => {
     const [themeValue, setThemeValue] = useState<Theme>(Theme.Light);
+
+    const dispatch = useDispatch()
+
+    // const themeValue = useSelector(ThemeSelectors.getThemeValue)
 
     const [activeTab, setActiveTab] = useState(TabsTypes.All)
 
     const onChangeTheme = (value: Theme) => () => {
         setThemeValue(value);
     };
+    // const onChangeTheme = (value: Theme) => () => {
+    //     dispatch(setThemeValue(value));
+    // };
 
 
     const tabList = [
