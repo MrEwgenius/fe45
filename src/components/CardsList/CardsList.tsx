@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 
-import { PostsList } from 'src/@types';
+import { Post, PostsList } from 'src/@types';
 import Posts, { PostsTypes } from 'src/components/Posts/Posts';
 
 import styles from './CardsList.module.scss'
+import { useDispatch } from 'react-redux';
+import { setSelectedPost, setSelectedPostModalOpened } from 'src/redux/reducers/postSlice';
+import { setSelectedImage, setSelectedImageModalOpened } from 'src/redux/reducers/imageSlice';
 
 type CardsListProps = {
     cardsList: PostsList,
@@ -13,6 +16,21 @@ type CardsListProps = {
 
 const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
+    const dispatch = useDispatch()
+
+    const onOpenClick = (cardsList: string ) => () => {
+        dispatch(setSelectedImageModalOpened(true))
+        dispatch(setSelectedImage(cardsList))
+
+    }
+
+    const onMoreClick = (post: Post) => () => {
+
+        dispatch(setSelectedPostModalOpened(true))
+        dispatch(setSelectedPost(post))
+
+    }
+
 
 
     return cardsList.length ? (
@@ -21,14 +39,20 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
                 <Posts
                     type={PostsTypes.Large}
+
                     {...cardsList[0]}
+                    onMoreClick={onMoreClick(cardsList[0])}
+                    onOpenClick={onOpenClick(cardsList[0].image)}
                 />
                 <div className={styles.medium}>
                     {cardsList.map((el, idx) => {
                         if (idx >= 1 && idx <= 4) {
                             return <Posts key={el.id}
                                 type={PostsTypes.Medium}
+                                
                                 {...el}
+                                onMoreClick={onMoreClick(el)}
+                                onOpenClick={onOpenClick(el.image)}
                             />
                         }
                     })}
@@ -41,6 +65,8 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
                             type={PostsTypes.Small}
                             {...el}
+                            onMoreClick={onMoreClick(el)}
+                            onOpenClick={onOpenClick(el.image)}
                         />
                     }
                 })}

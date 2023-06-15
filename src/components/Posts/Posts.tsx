@@ -24,8 +24,11 @@ type PostsProps = {
     text?: string,
     date?: string,
     lesson_num?: number,
-    title: string,
+    title?: string,
     author?: number,
+    onMoreClick?: () => void,
+    onOpenClick?: () => void,
+
 }
 
 
@@ -34,6 +37,8 @@ const Posts: FC<PostsProps> = ({
     type,
     title,
     id,
+    onMoreClick,
+    onOpenClick,
     date,
     text,
     image,
@@ -56,17 +61,19 @@ const Posts: FC<PostsProps> = ({
                         <div className={styles.postText}>{text}</div>
                     )}
                 </div>
-                <img className={styles.postImg} src={image} alt="image" />
+                <img onClick={onOpenClick} className={styles.postImg} src={image} alt="image" />
 
             </div>
-            <div className={styles.iconContainerWrap}>
+             <div className={styles.iconContainerWrap}>
                 <div className={styles.likeDislikeContainer}>
                     <LikeIcons />
                     <DislikeIcon />
                 </div>
                 <div className={styles.bookmarkMoreHorizontalContainer}>
                     <Bookmark />
-                    <MoreHorizontal />
+                    {onMoreClick && <div onClick={onMoreClick}>
+                        <MoreHorizontal />
+                    </div>}
                 </div>
             </div>
         </div>

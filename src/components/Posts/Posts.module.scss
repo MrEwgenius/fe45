@@ -206,3 +206,11 @@
         }
     }
 }
+
+.likeDislikeContainer,
+.bookmarkMoreHorizontalContainer {
+    svg,
+    div {
+        cursor: pointer;
+    }
+}

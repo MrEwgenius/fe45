@@ -8,6 +8,8 @@ import TabsList from "src/components/TabsList";
 
 import styles from "./Home.module.scss";
 import { useThemeContext } from "src/context/Theme";
+import SelectedPostModal from "./SelectedPostModal/SelectedPostModal";
+import SelectedImageModal from "./SelectedImageModal/SelectedImageModal";
 
 const MOCK_ARRAY = [
   {
@@ -198,6 +200,8 @@ const Home = () => {
         onTabClick={onTabClick}
       />
       <CardsList cardsList={cardsList} />
+      <SelectedPostModal />
+      <SelectedImageModal />
     </div >
   );
 };
