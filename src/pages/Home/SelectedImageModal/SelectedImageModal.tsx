@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Modal from 'src/components/Modal/Modal';
 import { ImageSelectors, setSelectedImage, setSelectedImageModalOpened } from 'src/redux/reducers/imageSlice';
+
+import style from './SelectedImageModal.module.scss'
 
 const SelectedImageModal = () => {
 
@@ -18,8 +21,16 @@ const SelectedImageModal = () => {
 
 
     return selectedImage ? (
-        <Modal isOpen={isOpened} onClose={onCloseModal} >
-            <img src={selectedImage}  />
+        <Modal
+            isOpen={isOpened}
+            onClose={onCloseModal}
+        >
+            <div className={style.containerImg}>
+                <div className={style.selectedImage}>
+                    <img src={selectedImage} alt="selectedImage" />
+                </div>
+            </div>
+
         </Modal>
     ) : null
 }

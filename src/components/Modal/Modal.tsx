@@ -2,9 +2,11 @@ import React, { FC } from 'react';
 
 
 import ReactModal from 'react-modal'
-import { Children } from 'src/@types';
+import { Children, Theme } from 'src/@types';
 import style from './Modal.module.scss'
 import { CloseIcon } from 'src/assets/icons';
+import { useThemeContext } from 'src/context/Theme';
+import classNames from 'classnames';
 
 
 type ModalProps = {
@@ -16,12 +18,26 @@ type ModalProps = {
 
 
 const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
-    return (
-        <ReactModal className={style.containerModal} isOpen={isOpen} onRequestClose={onClose}>
-            <div onClick={onClose} className={style.close}><CloseIcon fill='black' /></div>
-            {children}
 
-        </ReactModal>
+    const { themeValue } = useThemeContext()
+
+    return (
+        <ReactModal
+            className={classNames(style.containerModal, { [style.dark]: themeValue === Theme.Dark })}
+            onRequestClose={onClose}
+            isOpen={isOpen}
+        >
+
+            <div
+                className={style.close}
+                onClick={onClose}
+            >
+                <CloseIcon fill='black' />
+
+            </div>
+
+            {children}
+        </ReactModal >
     );
 }
 

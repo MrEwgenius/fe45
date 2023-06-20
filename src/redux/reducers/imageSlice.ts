@@ -1,12 +1,10 @@
-import React from 'react';
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { RootState } from '../store';
-import { Post } from 'src/@types';
 
 type initialState = {
     isSelectedImageModalOpened: boolean,
-    selectedImage: string ,
+    selectedImage: string,
 }
 
 const initialState: initialState = {
@@ -22,7 +20,7 @@ const imageSlice = createSlice({
         setSelectedImageModalOpened: (state, action: PayloadAction<boolean>) => {
             state.isSelectedImageModalOpened = action.payload;
         },
-        setSelectedImage: (state, action: PayloadAction<string >) => {
+        setSelectedImage: (state, action: PayloadAction<string>) => {
             state.selectedImage = action.payload;
         }
     },
