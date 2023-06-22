@@ -29,3 +29,16 @@ export enum Theme {
     Light = "light",
     Dark = "dark",
 }
+
+export enum LikeStatus {
+
+    Like = 'like',
+    Dislike = 'dislike',
+
+}
+export enum SaveStatus {
+
+    Saved = 'saved',
+    NotSaved = 'notSaved',
+
+}

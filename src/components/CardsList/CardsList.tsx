@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import { Post, PostsList } from 'src/@types';
+import { LikeStatus, Post, PostsList, SaveStatus } from 'src/@types';
 import Posts, { PostsTypes } from 'src/components/Posts/Posts';
 
 import styles from './CardsList.module.scss'
 import { useDispatch } from 'react-redux';
-import { setSelectedPost, setSelectedPostModalOpened } from 'src/redux/reducers/postSlice';
+import { setLikeStatus, setSavedStatus, setSelectedPost, setSelectedPostModalOpened } from 'src/redux/reducers/postSlice';
 import { setSelectedImage, setSelectedImageModalOpened } from 'src/redux/reducers/imageSlice';
 
 type CardsListProps = {
@@ -18,7 +18,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
     const dispatch = useDispatch()
 
-    const onOpenClick = (cardsList: string ) => () => {
+    const onOpenClick = (cardsList: string) => () => {
         dispatch(setSelectedImageModalOpened(true))
         dispatch(setSelectedImage(cardsList))
 
@@ -31,7 +31,18 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
     }
 
+    const onStatusClick = (card: Post) => (status: LikeStatus) => {
 
+        dispatch(setLikeStatus({ card, status }))
+
+
+    }
+    const onSavedStatus = (card: Post) => (status: SaveStatus) => {
+
+        dispatch(setSavedStatus({ card, status }))
+
+
+    }
 
     return cardsList.length ? (
         <div className={styles.cardListcontainer}>
@@ -39,20 +50,23 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
                 <Posts
                     type={PostsTypes.Large}
-
                     {...cardsList[0]}
                     onMoreClick={onMoreClick(cardsList[0])}
                     onOpenClick={onOpenClick(cardsList[0].image)}
+                    onStatusClick={onStatusClick(cardsList[0])}
+                    onSavedClick={onSavedStatus(cardsList[0])}
                 />
                 <div className={styles.medium}>
                     {cardsList.map((el, idx) => {
                         if (idx >= 1 && idx <= 4) {
                             return <Posts key={el.id}
                                 type={PostsTypes.Medium}
-                                
                                 {...el}
                                 onMoreClick={onMoreClick(el)}
                                 onOpenClick={onOpenClick(el.image)}
+                                onStatusClick={onStatusClick(el)}
+                                onSavedClick={onSavedStatus(el)}
+
                             />
                         }
                     })}
@@ -62,11 +76,13 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
                 {cardsList.map((el, idx) => {
                     if (idx >= 5 && idx <= 10) {
                         return <Posts key={el.id}
-
                             type={PostsTypes.Small}
                             {...el}
                             onMoreClick={onMoreClick(el)}
                             onOpenClick={onOpenClick(el.image)}
+                            onStatusClick={onStatusClick(el)}
+                            onSavedClick={onSavedStatus(el)}
+
                         />
                     }
                 })}

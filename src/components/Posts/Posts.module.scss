@@ -69,7 +69,7 @@
     .bookmarkMoreHorizontalContainer {
         max-width: 100%;
         display: flex;
-        gap: 25px;
+        gap: 33px;
         align-items: center;
     }
 }
@@ -130,7 +130,7 @@
     .bookmarkMoreHorizontalContainer {
         max-width: 100%;
         display: flex;
-        gap: 25px;
+        gap: 33px;
         align-items: center;
     }
 }
@@ -189,7 +189,7 @@
     .bookmarkMoreHorizontalContainer {
         max-width: 100%;
         display: flex;
-        gap: 25px;
+        gap: 33px;
         align-items: center;
     }
 }
@@ -209,8 +209,32 @@
 
 .likeDislikeContainer,
 .bookmarkMoreHorizontalContainer {
-    svg,
-    div {
+    .likeCount,
+    .dislikeCount {
+        color: $secondary;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    svg {
         cursor: pointer;
+    }
+}
+
+.likecontainerWrap {
+    position: relative;
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    .likeCount {
+        position: absolute;
+        left: 30px;
+    }
+    .dislikeCount {
+        position: absolute;
+        left: 30px;
+    }
+    .darkCount {
+        color: $white;
     }
 }

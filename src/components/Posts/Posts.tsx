@@ -7,9 +7,11 @@ import {
     MoreHorizontal
 } from 'src/assets/icons';
 import { useThemeContext } from 'src/context/Theme';
-import { Theme } from 'src/@types';
+import { LikeStatus, SaveStatus, Theme } from 'src/@types';
 
 import styles from './Posts.module.scss'
+import { useSelector } from 'react-redux';
+import { PostSelectors } from 'src/redux/reducers/postSlice';
 
 export enum PostsTypes {
     Large = 'large',
@@ -28,6 +30,8 @@ type PostsProps = {
     author?: number,
     onMoreClick?: () => void,
     onOpenClick?: () => void,
+    onStatusClick: (status: LikeStatus) => void,
+    onSavedClick: (status: SaveStatus) => void,
 
 }
 
@@ -39,6 +43,8 @@ const Posts: FC<PostsProps> = ({
     id,
     onMoreClick,
     onOpenClick,
+    onStatusClick,
+    onSavedClick,
     date,
     text,
     image,
@@ -46,8 +52,20 @@ const Posts: FC<PostsProps> = ({
 
     const postsStyle = styles[type]
 
-
     const { themeValue } = useThemeContext()
+
+    const likedPosts = useSelector(PostSelectors.getLikedPosts)
+    const dislikedPosts = useSelector(PostSelectors.getDislikedPosts)
+
+    const likeIndex = likedPosts.findIndex(item => item.id === id)
+    const dislikeIndex = dislikedPosts.findIndex(item => item.id === id)
+
+    const savedPosts = useSelector(PostSelectors.getSavedPosts)
+    const saveIndex = savedPosts.findIndex(item => item.id === id)
+    
+    const d = 'M15 20C14.795 20 14.592 19.937 14.419 19.813L8 15.229L1.581 19.813C1.277 20.032 0.875 20.062 0.542 19.89C0.209 19.718 0 19.375 0 19V3C0 1.346 1.346 0 3 0H13C14.654 0 16 1.346 16 3V19C16 19.375 15.791 19.718 15.458 19.89C15.313 19.963 15.156 20 15 20Z'
+
+
 
 
 
@@ -64,19 +82,25 @@ const Posts: FC<PostsProps> = ({
                 <img onClick={onOpenClick} className={styles.postImg} src={image} alt="image" />
 
             </div>
-             <div className={styles.iconContainerWrap}>
+            <div className={styles.iconContainerWrap}>
                 <div className={styles.likeDislikeContainer}>
-                    <LikeIcons />
-                    <DislikeIcon />
+                    <div className={styles.likecontainerWrap} onClick={() => onStatusClick(LikeStatus.Like)}>
+                        <LikeIcons /> {likeIndex > -1 && <span className={classNames(styles.likeCount, { [styles.darkCount]: themeValue === Theme.Dark })}> 1</span>}
+                    </div>
+                    <div className={styles.likecontainerWrap} onClick={() => onStatusClick(LikeStatus.Dislike)}>
+                        <DislikeIcon />{dislikeIndex > -1 && <span className={classNames(styles.dislikeCount, { [styles.darkCount]: themeValue === Theme.Dark })}>1</span>}
+                    </div>
                 </div>
                 <div className={styles.bookmarkMoreHorizontalContainer}>
-                    <Bookmark />
+                    <div className={styles.bookmark} onClick={() => onSavedClick(SaveStatus.Saved)}>
+                        {saveIndex === -1 ? <Bookmark /> : <Bookmark d={d} />}
+                    </div>
                     {onMoreClick && <div onClick={onMoreClick}>
                         <MoreHorizontal />
                     </div>}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
