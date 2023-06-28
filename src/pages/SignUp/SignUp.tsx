@@ -7,6 +7,8 @@ import { Theme } from "src/@types";
 import { useThemeContext } from "src/context/Theme";
 
 import styles from "./SignUp.module.scss";
+import { useDispatch } from "react-redux";
+import { signUpUser } from "src/redux/reducers/authSlice";
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -16,11 +18,22 @@ const SignUp = () => {
 
     const { themeValue } = useThemeContext();
 
+    const dispath = useDispatch();
+
+    const onSubmit = () => {
+        const data = {
+            username: name,
+            email,
+            password,
+        };
+        dispath(signUpUser({ data, callback: () => { } }))
+    }
+
     return (
         <FormPagesContainer
             title={"Sign Up"}
             btnTitle={"Sign Up"}
-            onSubmit={() => { }}
+            onSubmit={onSubmit}
             additionalInfo={
                 <div className={classNames(styles.additionalInfo,
                     { [styles.darkAdditionalInfo]: themeValue === Theme.Dark, })}>

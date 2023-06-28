@@ -4,12 +4,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { LikeStatus, Post, PostsList, SaveStatus } from 'src/@types';
 
+import { all, takeLatest, call } from "redux-saga/effects";
+import { ApiResponse } from 'apisauce'
+
+import { signUpUser } from "src/redux/reducers/authSlice";
+import { PostsData, SignUpUserPayload, signUpResponseData } from "../@types";
+import API from "src/utils/api";
+
 type initialState = {
     isSelectedPostModalOpened: boolean,
     selectedPost: Post | null,
     likedPosts: PostsList,
     dislikedPosts: PostsList,
     savedPosts: PostsList,
+    postsList: PostsList,
 }
 
 const initialState: initialState = {
@@ -18,6 +26,7 @@ const initialState: initialState = {
     likedPosts: [],
     dislikedPosts: [],
     savedPosts: [],
+    postsList: []
 };
 const postSlice = createSlice({
 
@@ -31,6 +40,14 @@ const postSlice = createSlice({
         setSelectedPost: (state, action: PayloadAction<Post | null>) => {
             state.selectedPost = action.payload;
         },
+
+        getPostList: (_, __: PayloadAction<undefined>) => { },
+
+        setPostsList: (state, action: PayloadAction<PostsList>) => {
+            state.postsList = action.payload;
+
+        },
+
 
         setLikeStatus: (state, action: PayloadAction<{ card: Post, status: LikeStatus }>) => {
             const { card, status } = action.payload;
@@ -52,7 +69,6 @@ const postSlice = createSlice({
             }
 
         },
-        /////////////////////////////////
         setSavedStatus: (state, action: PayloadAction<{ card: Post, status: SaveStatus }>) => {
             const { card, status } = action.payload;
             const savedIndex = state.savedPosts.findIndex(item => item.id === card.id)
@@ -68,7 +84,8 @@ const postSlice = createSlice({
     },
 })
 
-export const { setSelectedPostModalOpened, setSelectedPost, setLikeStatus, setSavedStatus } = postSlice.actions
+
+export const { setSelectedPostModalOpened, setSelectedPost, setLikeStatus, setSavedStatus, getPostList, setPostsList } = postSlice.actions
 
 export const PostSelectors = {
     getSelectedPostModalOpened: (state: RootState) =>
@@ -77,6 +94,9 @@ export const PostSelectors = {
     getLikedPosts: (state: RootState) => state.postReduser.likedPosts,
     getDislikedPosts: (state: RootState) => state.postReduser.dislikedPosts,
     getSavedPosts: (state: RootState) => state.postReduser.savedPosts,
+    getPostsList: (state: RootState) => state.postReduser.postsList
 }
+
+
 
 export default postSlice.reducer
