@@ -1,0 +1,196 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+@import "src/styles/colors.scss";
+
+.large {
+    position: relative;
+    margin-bottom: 60px;
+    &::after {
+        position: absolute;
+        margin-top: 40px;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: $medium;
+    }
+    max-width: 736px;
+    gap: 32px;
+    .postWrap {
+        display: flex;
+        justify-content: space-between;
+        .postContainer {
+            max-width: 448px;
+            margin-bottom: 33px;
+        }
+
+        .postImg {
+            width: 256px;
+            height: 244px;
+            object-fit: cover;
+        }
+
+        .postDate {
+            font-family: "Inter";
+            font-style: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray;
+            margin-bottom: 8px;
+        }
+
+        .postTitle {
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 44px;
+            color: $secondary;
+            max-width: 350px;
+            margin-bottom: 24px;
+            &:hover {
+                cursor: pointer;
+                color: $primary;
+            }
+        }
+        .postText{
+            font-family: "Inter";
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            color: $gray;
+        }
+    }
+    .iconContainerWrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .likeDislikeContainer,
+    .bookmarkMoreHorizontalContainer {
+        max-width: 100%;
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+}
+
+.medium {
+    position: relative;
+    margin-bottom: 60px;
+    &::after {
+        position: absolute;
+        margin-top: 40px;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: $medium;
+    }
+    max-width: 352px;
+    .postWrap {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-bottom: 30px;
+        .postContainer {
+            max-width: 448px;
+        }
+
+        .postImg {
+            width: 352px;
+            height: 246px;
+            object-fit: cover;
+            margin-bottom: 24px;
+        }
+
+        .postDate {
+            font-family: "Inter";
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray;
+            margin-bottom: 8px;
+        }
+
+        .postTitle {
+            font-family: "Inter";
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+            color: $secondary;
+            max-width: 350px;
+            &:hover {
+                cursor: pointer;
+                color: $primary;
+            }
+        }
+    }
+    .iconContainerWrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .likeDislikeContainer,
+    .bookmarkMoreHorizontalContainer {
+        max-width: 100%;
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+}
+.small {
+    position: relative;
+    margin-bottom: 60px;
+    &::after {
+        position: absolute;
+        margin-top: 40px;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: $medium;
+    }
+    max-width: 352px;
+    .postWrap {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        .postContainer {
+            max-width: 448px;
+        }
+
+        .postImg {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+        }
+
+        .postDate {
+            font-family: "Inter";
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray;
+            margin-bottom: 8px;
+        }
+
+        .postTitle {
+            font-family: "Inter";
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+            color: $secondary;
+            max-width: 220px;
+            &:hover {
+                cursor: pointer;
+                color: $primary;
+            }
+        }
+    }
+    .iconContainerWrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .likeDislikeContainer,
+    .bookmarkMoreHorizontalContainer {
+        max-width: 100%;
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+}
