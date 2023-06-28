@@ -1,5 +1,9 @@
 @import "src/styles/colors";
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> b09487edbd8b32b3973154b9820b92f244fad90e
 .input {
   padding: 18px 20px;
   background-color: $white;
@@ -9,9 +13,16 @@
   font-size: 16px;
   line-height: 20px;
   color: $secondary;
+<<<<<<< HEAD
+  border-radius: 4px;
+  resize: none;
+  width: 100%;
+
+=======
   min-width: 544px;
   border-radius: 4px;
   resize: none;
+>>>>>>> b09487edbd8b32b3973154b9820b92f244fad90e
   &:hover,
   &:focus {
     border-color: $medium;
@@ -47,4 +58,8 @@
 
 .errorInput {
   border-color: $error;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b09487edbd8b32b3973154b9820b92f244fad90e
