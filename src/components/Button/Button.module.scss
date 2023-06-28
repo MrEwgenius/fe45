@@ -3,16 +3,23 @@
 @mixin button {
     padding: 16px 32px;
     font-family: "Inter";
+<<<<<<< HEAD
+=======
+    font-style: normal;
+>>>>>>> b09487edbd8b32b3973154b9820b92f244fad90e
     font-weight: 600;
     font-size: 18px;
     line-height: 24px;
     box-sizing: border-box;
     border: 1px solid transparent;
+<<<<<<< HEAD
     color: $white;
     display: flex;
     justify-content: center;
     border-radius: 4px;
 
+=======
+>>>>>>> b09487edbd8b32b3973154b9820b92f244fad90e
     &:hover {
         cursor: pointer;
     }
