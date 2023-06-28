@@ -20,7 +20,7 @@ const App = () => {
     };
     const onChange = (value: string) => {
         setInputValue(value);
-    };
+    }; 
     return (
         <div >
             {/* <Input
