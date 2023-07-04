@@ -4,13 +4,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { LikeStatus, Post, PostsList, SaveStatus } from 'src/@types';
 
-import { all, takeLatest, call } from "redux-saga/effects";
-import { ApiResponse } from 'apisauce'
-
-import { signUpUser } from "src/redux/reducers/authSlice";
-import { PostsData, SignUpUserPayload, signUpResponseData } from "../@types";
-import API from "src/utils/api";
-
 type initialState = {
     isSelectedPostModalOpened: boolean,
     selectedPost: Post | null,
@@ -18,6 +11,8 @@ type initialState = {
     dislikedPosts: PostsList,
     savedPosts: PostsList,
     postsList: PostsList,
+    singlePost: Post | null,
+
 }
 
 const initialState: initialState = {
@@ -26,7 +21,8 @@ const initialState: initialState = {
     likedPosts: [],
     dislikedPosts: [],
     savedPosts: [],
-    postsList: []
+    postsList: [],
+    singlePost: null,
 };
 const postSlice = createSlice({
 
@@ -40,13 +36,21 @@ const postSlice = createSlice({
         setSelectedPost: (state, action: PayloadAction<Post | null>) => {
             state.selectedPost = action.payload;
         },
-
+        //get пустой потому что мы ничего не передаём на сервер поэтому undefinded
         getPostList: (_, __: PayloadAction<undefined>) => { },
-
+        //в этом экшене мы получаем массив PostsList из сервера
+        //  и типизируем его PayloadAction<PostsList>
         setPostsList: (state, action: PayloadAction<PostsList>) => {
             state.postsList = action.payload;
-
         },
+        getSinglePost: (_, __: PayloadAction<string>) => { },
+        setSinglePost: (state, action: PayloadAction<Post | null>) => {
+            state.singlePost = action.payload;
+
+         },
+
+         
+
 
 
         setLikeStatus: (state, action: PayloadAction<{ card: Post, status: LikeStatus }>) => {
@@ -85,7 +89,16 @@ const postSlice = createSlice({
 })
 
 
-export const { setSelectedPostModalOpened, setSelectedPost, setLikeStatus, setSavedStatus, getPostList, setPostsList } = postSlice.actions
+export const {
+    setSelectedPostModalOpened,
+    setSelectedPost,
+    setLikeStatus,
+    setSavedStatus,
+    getPostList,
+    setPostsList,
+    setSinglePost,
+    getSinglePost
+} = postSlice.actions
 
 export const PostSelectors = {
     getSelectedPostModalOpened: (state: RootState) =>
@@ -94,7 +107,8 @@ export const PostSelectors = {
     getLikedPosts: (state: RootState) => state.postReduser.likedPosts,
     getDislikedPosts: (state: RootState) => state.postReduser.dislikedPosts,
     getSavedPosts: (state: RootState) => state.postReduser.savedPosts,
-    getPostsList: (state: RootState) => state.postReduser.postsList
+    getPostsList: (state: RootState) => state.postReduser.postsList,
+    getSinglePost: (state: RootState) => state.postReduser.singlePost,
 }
 
 

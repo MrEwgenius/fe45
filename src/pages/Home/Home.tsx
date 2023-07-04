@@ -12,6 +12,7 @@ import SelectedPostModal from "./SelectedPostModal/SelectedPostModal";
 import SelectedImageModal from "./SelectedImageModal/SelectedImageModal";
 import { useDispatch, useSelector } from "react-redux";
 import { PostSelectors, getPostList, setPostsList } from "src/redux/reducers/postSlice";
+import { AuthSelectors } from "src/redux/reducers/authSlice";
 
 // const MOCK_ARRAY = [
 //   {
@@ -161,58 +162,57 @@ import { PostSelectors, getPostList, setPostsList } from "src/redux/reducers/pos
 // ];
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState(TabsTypes.All);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+    const [activeTab, setActiveTab] = useState(TabsTypes.All);
 
-  const cardsList = useSelector(PostSelectors.getPostsList)
+    const cardsList = useSelector(PostSelectors.getPostsList)
 
-  // const [cardsList, setCardsList] = useState<PostsList>([]);
 
-  const tabsList = useMemo(
-    () => [
-      { key: TabsTypes.All, title: "All Posts", disabled: false },
-      { key: TabsTypes.Popular, title: "Popular Posts", disabled: false },
-      {
-        key: TabsTypes.MyFavorite,
-        title: "Favourite Posts",
-        disabled: !isLoggedIn,
-      },
-    ],
-    [isLoggedIn]
-  );
+    const isLoggedIn = useSelector(AuthSelectors.getLoggedIn)
+    const tabsList = useMemo(
+        () => [
+            { key: TabsTypes.All, title: "All Posts", disabled: false },
+            { key: TabsTypes.Popular, title: "Popular Posts", disabled: false },
+            {
+                key: TabsTypes.MyFavorite,
+                title: "Favourite Posts",
+                disabled: !isLoggedIn,
+            },
+        ],
+        [isLoggedIn]
+    );
 
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-  useEffect(() => {
+    useEffect(() => {
+        dispatch(getPostList())
 
-    dispatch(getPostList())
 
-  }, [])
+    }, [])
 
-  const onTabClick = (tab: TabsTypes) => () => {
-    setActiveTab(tab);
-    if (tab === TabsTypes.Popular) {
-      setLoggedIn(true);
-    }
-  };
+    const onTabClick = (tab: TabsTypes) => () => {
+        setActiveTab(tab);
+        // if (tab === TabsTypes.Popular) {
+        //   setLoggedIn(true);
+        // }
+    };
 
-  const { themeValue } = useThemeContext();
+    const { themeValue } = useThemeContext();
 
-  return (
-    <div className={classNames({
-      [styles.darkContainer]: themeValue === Theme.Dark,
-    })}>
-      <Title title={"Blog"} className={styles.pageTitle} />
-      <TabsList
-        tabsList={tabsList}
-        activeTab={activeTab}
-        onTabClick={onTabClick}
-      />
-      <CardsList cardsList={cardsList} />
-      <SelectedPostModal />
-      <SelectedImageModal />
-    </div >
-  );
+    return (
+        <div className={classNames({
+            [styles.darkContainer]: themeValue === Theme.Dark,
+        })}>
+            <Title title={"Blog"} className={styles.pageTitle} />
+            <TabsList
+                tabsList={tabsList}
+                activeTab={activeTab}
+                onTabClick={onTabClick}
+            />
+            <CardsList cardsList={cardsList} />
+            <SelectedPostModal />
+            <SelectedImageModal />
+        </div >
+    );
 };
 
 export default Home;

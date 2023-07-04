@@ -5,6 +5,10 @@ import Input from '../../components/Input/Input';
 import { useThemeContext } from 'src/context/Theme';
 import classNames from 'classnames';
 import { Theme } from 'src/@types';
+import { useDispatch } from 'react-redux';
+import { signInUser } from 'src/redux/reducers/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { RoutesList } from '../Router';
 
 
 const SignIn = () => {
@@ -12,12 +16,26 @@ const SignIn = () => {
     const [password, setPassword] = useState("");
     const { themeValue } = useThemeContext();
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const onSubmit = () => {
+
+        dispatch(signInUser({
+            data: { email, password },
+            callback: () => { navigate(RoutesList.Home) }
+        }))
+
+
+    }
+
+
     return (
         <div>
             <FormPagesContainer
                 title={"Sign In"}
                 btnTitle={"Sign In"}
-                onSubmit={() => { }}
+                onSubmit={onSubmit}
                 additionalInfo={
                     <div className={styles.additionalInfo}>
                         {"Already have an account?"}

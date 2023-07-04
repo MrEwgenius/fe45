@@ -13,10 +13,12 @@ import styles from './Header.module.scss'
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import Username from '../Username/Username';
 import Input from '../Input/Input';
+import { useSelector } from 'react-redux';
+import { AuthSelectors } from 'src/redux/reducers/authSlice';
 const Header = () => {
     const { themeValue } = useThemeContext();
 
-    const isLoggedIn = true
+    const isLoggedIn = useSelector(AuthSelectors.getLoggedIn)
 
     // const isSearchOn = true
 
@@ -32,6 +34,8 @@ const Header = () => {
     const handleSearchOpened = () => {
         setSearch(!isSearch)
     }
+
+    const userInfo = useSelector(AuthSelectors.getUserInfo)
 
     const navigate = useNavigate()
 
@@ -78,8 +82,8 @@ const Header = () => {
                         onClick={handleSearchOpened}
                         className={styles.searchButton}
                     />
-                    {isLoggedIn ?
-                        <Username username={'Yauheni'} className={styles.userNameContainer} />
+                    {isLoggedIn && userInfo ?
+                        <Username username={userInfo.username} className={styles.userNameContainer} />
                         :
                         <Button
                             type={ButtonTypes.Primary}
@@ -87,6 +91,7 @@ const Header = () => {
                             onClick={onLiginButtonClick}
                             className={styles.userButton}
                         />
+                        // {isLoggedIn && <Username username={'Yauheni'} />}
                     }
                 </div>
 
@@ -102,7 +107,7 @@ const Header = () => {
             </div>
             {isOpened && <div className={styles.menuContainer}>
                 <div>
-                    {isLoggedIn && <Username username={'Yauheni'} />}
+                    {isLoggedIn && userInfo && < Username username={userInfo?.username} />}
                     {navLinks.map(link =>
                         <NavLink
                             to={link.path}

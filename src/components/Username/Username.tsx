@@ -16,7 +16,7 @@ const Username: FC<UsernameProps> = ({ username, className }) => {
 
   return (
     <div className={classNames(className, styles.container)}>
-      <div className={styles.initials}>{username[0]}</div>
+      <div className={styles.initials}>{username[0].toUpperCase()}</div>
       <div className={styles.username}>{username}</div>
     </div>
   );

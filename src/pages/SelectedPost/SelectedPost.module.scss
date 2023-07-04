@@ -13,7 +13,12 @@
         font-size: 16px;
         line-height: 24px;
         color: $secondary;
+        cursor: pointer;
+        background-color: #201616;
+        display: block;
+        width: 100px;
         .numberPost {
+            cursor: default;
             font-family: "Inter";
             font-weight: 400;
             font-size: 16px;
@@ -74,9 +79,8 @@
 }
 .darkContainer {
     background-color: $secondary;
-    .breadcrumbs{
+    .breadcrumbs {
         color: $white;
-        
     }
     .description {
         color: $white;
