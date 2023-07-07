@@ -10,7 +10,7 @@ import styles from './Tabs.module.scss'
 
 export enum TabsTypes {
     All = 'all',
-    MyFavorite = 'myfavorite',
+    MyPosts = 'myPosts',
     Popular = 'popular',
 }
 

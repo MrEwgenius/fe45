@@ -56,3 +56,9 @@ export type UserInfoData = {
 }
 
 export type UserInfoDataPayload = PayloadWithDataAndCallback<UserInfoData>
+
+
+export type RefreshResponseData = {
+    access: string,
+
+}

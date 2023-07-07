@@ -25,9 +25,14 @@ const getSinglePost = (id: string) => {
 const createToken = (data: SignInData) => {
     return API.post('/auth/jwt/create/', data)
 }
+const verifyToken = (token: string) => {
+    return API.post('/auth/jwt/verify/', { token })
+}
+const refreshToken = (refresh: string) => {
+    return API.post('/auth/jwt/refresh/', { refresh })
+}
 
 const getUserInfo = (token: string) => {
-
     return API.get(
         '/auth/users/me/',
         {},
@@ -35,11 +40,12 @@ const getUserInfo = (token: string) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
-
         },
-
     )
 }
+
+
+
 
 export default {
     signUpUser,
@@ -48,4 +54,6 @@ export default {
     activateUser,
     getSinglePost,
     getUserInfo,
+    verifyToken,
+    refreshToken,
 }

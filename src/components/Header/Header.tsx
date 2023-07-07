@@ -13,8 +13,8 @@ import styles from './Header.module.scss'
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import Username from '../Username/Username';
 import Input from '../Input/Input';
-import { useSelector } from 'react-redux';
-import { AuthSelectors } from 'src/redux/reducers/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthSelectors, logoutUser } from 'src/redux/reducers/authSlice';
 const Header = () => {
     const { themeValue } = useThemeContext();
 
@@ -38,6 +38,7 @@ const Header = () => {
     const userInfo = useSelector(AuthSelectors.getUserInfo)
 
     const navigate = useNavigate()
+    const dispatsh = useDispatch()
 
     const navLinks = useMemo(() => [
         { path: RoutesList.Home, title: 'Home' },
@@ -48,6 +49,10 @@ const Header = () => {
 
     const onLiginButtonClick = () => {
         navigate(RoutesList.SignIn)
+    }
+
+    const onLogout = () => {
+        dispatsh(logoutUser())
     }
 
     return (
@@ -123,7 +128,7 @@ const Header = () => {
                     <Button
                         type={ButtonTypes.Secondary}
                         title={isLoggedIn ? 'Log Out' : 'Sign In'}
-                        onClick={onLiginButtonClick}
+                        onClick={isLoggedIn ? onLogout : onLiginButtonClick}
                         className={styles.authButton}
                     />
                 </div>

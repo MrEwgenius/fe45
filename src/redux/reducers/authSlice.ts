@@ -26,16 +26,23 @@ const authSlice = createSlice({
         activateUser: (_, __: PayloadAction<ActivateUserPayload>) => { },
 
         getUserInfo: (_, __: PayloadAction<undefined>) => { },
-
-
         setUserInfo: (state, action: PayloadAction<UserInfoData | null>) => {
             state.userInfo = action.payload
-
         },
+
+        logoutUser: (_, __: PayloadAction<undefined>) => { }
     },
 })
 
-export const { signUpUser, signInUser, setAccessToken, activateUser, setUserInfo, getUserInfo } = authSlice.actions
+export const {
+    signUpUser,
+    signInUser,
+    setAccessToken,
+    activateUser,
+    setUserInfo,
+    getUserInfo,
+    logoutUser,
+} = authSlice.actions
 
 export const AuthSelectors = {
     getLoggedIn: (state: RootState) => !!state.authReducer.accessToken,

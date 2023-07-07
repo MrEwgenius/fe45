@@ -47,7 +47,7 @@ const App = () => {
 
     const tabList = [
         { key: TabsTypes.All, title: 'Это Титульник', disabled: false },
-        { key: TabsTypes.MyFavorite, title: 'Это MyFavorite', disabled: false },
+        { key: TabsTypes.MyPosts, title: 'Это MyPosts', disabled: false },
         { key: TabsTypes.Popular, title: 'Это Popular', disabled: false },
     ]
 

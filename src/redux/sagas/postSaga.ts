@@ -4,7 +4,7 @@ import { ApiResponse } from 'apisauce'
 import API from "src/utils/api";
 
 import { PostsData } from "../@types";
-import { getPostList, getSinglePost, setPostsList, setSinglePost } from "../reducers/postSlice";
+import { getPostList, getSinglePost, setPostsList, setSinglePost, setSinglePostLoading } from "../reducers/postSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 
@@ -29,6 +29,8 @@ function* postWorker() {
 
 function* getSinglePostWorker(action: PayloadAction<string>) {
 
+    yield put(setSinglePostLoading(true))
+
     const response: ApiResponse<undefined> = yield call(
         API.getSinglePost,
         action.payload
@@ -38,6 +40,7 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
     } else {
         console.error('Activate User Error', response.problem);
     }
+    yield put(setSinglePostLoading(false))
 
 }
 

@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getSinglePost } from 'src/redux/reducers/postSlice';
 import { RoutesList } from '../Router';
+import Loader from 'src/components/Loader/Loader';
 
 // type SelectedPostProps = {
 //     title?: string,
@@ -18,13 +19,7 @@ import { RoutesList } from '../Router';
 
 
 
-const SelectedPost = ({
-
-    // title,
-    // image,
-    // description,
-
-}) => {
+const SelectedPost = () => {
 
     const { themeValue } = useThemeContext();
     const singlePost = useSelector(PostSelectors.getSinglePost)
@@ -42,8 +37,9 @@ const SelectedPost = ({
         navigate(RoutesList.Home)
     }
 
+    const isSinglePostLoading = useSelector(PostSelectors.getSinglePostLoading)
 
-    return singlePost ? (
+    return singlePost && !isSinglePostLoading ? (
         <div className={classNames(styles.container, { [styles.darkContainer]: themeValue === Theme.Dark })} >
             <div onClick={onHomeClick} className={styles.breadcrumbs}>Home <span className={styles.numberPost}>| Post {singlePost.id}</span></div>
             <Title
@@ -63,7 +59,9 @@ const SelectedPost = ({
                 </div>
             </div >
         </div>
-    ) : null
+    ) : (
+        <Loader />
+    )
 }
 
 export default SelectedPost;

@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { LikeStatus, Post, PostsList, SaveStatus } from 'src/@types';
 import Posts, { PostsTypes } from 'src/components/Posts/Posts';
-
-import styles from './CardsList.module.scss'
-import { useDispatch } from 'react-redux';
 import { setLikeStatus, setSavedStatus, setSelectedPost, setSelectedPostModalOpened } from 'src/redux/reducers/postSlice';
 import { setSelectedImage, setSelectedImageModalOpened } from 'src/redux/reducers/imageSlice';
+
+import styles from './CardsList.module.scss'
+import Loader from '../Loader';
 
 type CardsListProps = {
     cardsList: PostsList,
@@ -90,7 +91,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
         </div>
 
     )
-        : null
+        : <Loader />
 }
 
 export default CardsList;
