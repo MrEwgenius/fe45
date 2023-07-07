@@ -4,8 +4,10 @@ import { ApiResponse } from 'apisauce'
 import API from "src/utils/api";
 
 import { PostsData } from "../@types";
-import { getPostList, getSinglePost, setPostsList, setSinglePost, setSinglePostLoading } from "../reducers/postSlice";
+import { getMyPosts, getPostList, getSinglePost, setMyPosts, setPostsList, setSinglePost, setSinglePostLoading } from "../reducers/postSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { ACCESS_TOKEN_KEY } from "src/utils/constants";
+import { callCheckingAuth } from "./helpers/callCheckingAuth";
 
 
 //запуск ракеты
@@ -44,12 +46,36 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 
 }
 
+function* getMyPostsWorker() {
+    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
 
-// gthtl rjcvjcjv
+    if (accessToken) {
+
+        // const response: ApiResponse<PostsData> = yield callCheckingAuth(API.getMyPosts)
+
+        const response: ApiResponse<PostsData> = yield call(
+            API.getMyPosts,
+            accessToken,
+        )
+        if (response.status === 404) {
+            yield put(setMyPosts([]))
+        } else {
+            if (response.data && response.ok) {
+                yield put(setMyPosts(response.data.results))
+            } else {
+                console.log('No Posts');
+            }
+        }
+    }
+
+}
+
+
 // перед космосом 
 export default function* postSagaWatcher() {
     yield all([
         takeLatest(getPostList, postWorker),
-        takeLatest(getSinglePost, getSinglePostWorker)
+        takeLatest(getSinglePost, getSinglePostWorker),
+        takeLatest(getMyPosts, getMyPostsWorker),
     ])
 }

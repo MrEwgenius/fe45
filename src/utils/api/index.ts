@@ -43,8 +43,17 @@ const getUserInfo = (token: string) => {
         },
     )
 }
-
-
+const getMyPosts = (token: string) => {
+    return API.get(
+        '/blog/posts/my_posts/',
+        {},
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        },
+    )
+}
 
 
 export default {
@@ -56,4 +65,5 @@ export default {
     getUserInfo,
     verifyToken,
     refreshToken,
+    getMyPosts,
 }

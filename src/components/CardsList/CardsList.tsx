@@ -10,7 +10,7 @@ import styles from './CardsList.module.scss'
 import Loader from '../Loader';
 
 type CardsListProps = {
-    cardsList: PostsList,
+    cardsList: PostsList 
 
 }
 

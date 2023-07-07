@@ -13,6 +13,7 @@ type initialState = {
     postsList: PostsList,
     singlePost: Post | null,
     setSinglePostLoading: boolean,
+    myPosts: PostsList,
 
 }
 
@@ -25,6 +26,7 @@ const initialState: initialState = {
     postsList: [],
     singlePost: null,
     setSinglePostLoading: false,
+    myPosts: [],
 };
 const postSlice = createSlice({
 
@@ -52,7 +54,10 @@ const postSlice = createSlice({
         },
         setSinglePost: (state, action: PayloadAction<Post | null>) => {
             state.singlePost = action.payload;
-
+        },
+        getMyPosts: (_, __: PayloadAction<undefined>) => { },
+        setMyPosts: (state, action: PayloadAction<PostsList>) => {
+            state.myPosts = action.payload
         },
 
 
@@ -105,6 +110,8 @@ export const {
     setSinglePost,
     getSinglePost,
     setSinglePostLoading,
+    setMyPosts,
+    getMyPosts,
 } = postSlice.actions
 
 export const PostSelectors = {
@@ -116,7 +123,8 @@ export const PostSelectors = {
     getSavedPosts: (state: RootState) => state.postReduser.savedPosts,
     getPostsList: (state: RootState) => state.postReduser.postsList,
     getSinglePost: (state: RootState) => state.postReduser.singlePost,
-    getSinglePostLoading: (state: RootState) => state.postReduser.setSinglePostLoading
+    getSinglePostLoading: (state: RootState) => state.postReduser.setSinglePostLoading,
+    getMyPosts: (state: RootState) =>  state.postReduser.myPosts 
 }
 
 

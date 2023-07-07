@@ -11,13 +11,13 @@ import { useThemeContext } from "src/context/Theme";
 import SelectedPostModal from "./SelectedPostModal/SelectedPostModal";
 import SelectedImageModal from "./SelectedImageModal/SelectedImageModal";
 import { useDispatch, useSelector } from "react-redux";
-import { PostSelectors, getPostList, setPostsList } from "src/redux/reducers/postSlice";
+import { PostSelectors, getMyPosts, getPostList, setPostsList } from "src/redux/reducers/postSlice";
 import { AuthSelectors } from "src/redux/reducers/authSlice";
 
 const Home = () => {
     const [activeTab, setActiveTab] = useState(TabsTypes.All);
 
-    const cardsList = useSelector(PostSelectors.getPostsList)
+    // const cardsList = useSelector(PostSelectors.getPostsList)
 
 
     const isLoggedIn = useSelector(AuthSelectors.getLoggedIn)
@@ -35,19 +35,16 @@ const Home = () => {
     );
 
     const dispatch = useDispatch()
-
     useEffect(() => {
         dispatch(getPostList())
+    }, [])
+
+    useEffect(() => {
 
         if (activeTab === TabsTypes.MyPosts) {
-            console.log(1);
-        // dispatch(getMyPosts())
-
-
-        }else{
-            console.log(2);
-        // dispatch(getAllPosts())
-
+            dispatch(getMyPosts())
+        } else {
+            dispatch(getPostList())
         }
 
     }, [activeTab])
@@ -57,6 +54,20 @@ const Home = () => {
     };
 
     const { themeValue } = useThemeContext();
+
+    const allPosts = useSelector(PostSelectors.getPostsList)
+    const myPosts = useSelector(PostSelectors.getMyPosts)
+
+    const clickOnTabs = () => {
+
+        if (activeTab === TabsTypes.MyPosts) {
+            return myPosts
+        } else {
+            return allPosts
+        }
+    }
+
+
 
     return (
         <div className={classNames({
@@ -68,7 +79,7 @@ const Home = () => {
                 activeTab={activeTab}
                 onTabClick={onTabClick}
             />
-            <CardsList cardsList={cardsList} />
+            <CardsList cardsList={clickOnTabs()} />
             <SelectedPostModal />
             <SelectedImageModal />
         </div >
