@@ -72,9 +72,7 @@ function* userInfoWorker() {
         if (response.ok && response.data) {
             yield put(setUserInfo(response.data))
 
-            console.log(setUserInfo(response.data));
         } else {
-            console.log(2);
             console.error('Get User Error', response.problem);
         }
     }

@@ -107,7 +107,7 @@ const Header = () => {
             </div>
             {isOpened && <div className={styles.menuContainer}>
                 <div>
-                    {isLoggedIn && userInfo && < Username username={userInfo?.username} />}
+                    {isLoggedIn && userInfo && < Username username={userInfo.username} />}
                     {navLinks.map(link =>
                         <NavLink
                             to={link.path}

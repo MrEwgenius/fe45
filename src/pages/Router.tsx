@@ -36,7 +36,6 @@ const Router = () => {
 
         if (isLoggedIn) {
             dispatch(getUserInfo())
-            
         }
     }, [isLoggedIn])
 
