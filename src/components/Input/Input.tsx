@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, LegacyRef, forwardRef } from "react";
+import React, { ChangeEvent, FC, KeyboardEvent, LegacyRef, forwardRef } from "react";
 import classNames from "classnames";
 
 import { useThemeContext } from "src/context/Theme";
@@ -14,7 +14,8 @@ type InputProps = {
     disabled?: boolean;
     errorText?: string;
     isTextarea?: boolean;
-    className?:string;
+    className?: string;
+    onKeyDown?: (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 };
 
 
@@ -31,7 +32,8 @@ const Input = forwardRef<(HTMLInputElement | null) | (LegacyRef<HTMLTextAreaElem
             disabled,
             value,
             isTextarea,
-            className
+            className,
+            onKeyDown,
         } = props
 
         const { themeValue } = useThemeContext();
@@ -46,10 +48,11 @@ const Input = forwardRef<(HTMLInputElement | null) | (LegacyRef<HTMLTextAreaElem
             onChange: onInputChange,
             value,
             placeholder,
-            className: classNames(styles.input,className, {
+            className: classNames(styles.input, className, {
                 [styles.disabled]: disabled,
                 [styles.errorInput]: errorText,
             }),
+            onKeyDown,
         };
 
         return (

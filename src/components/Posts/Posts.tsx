@@ -18,6 +18,7 @@ export enum PostsTypes {
     Large = 'large',
     Medium = 'medium',
     Small = 'small',
+    Search = 'search',
 
 }
 interface PostsProps extends Post {

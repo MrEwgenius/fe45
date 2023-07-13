@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, KeyboardEvent } from 'react';
 import { Outlet, useNavigate, NavLink } from 'react-router-dom'
 import classNames from 'classnames';
 
@@ -33,6 +33,10 @@ const Header = () => {
 
     const handleSearchOpened = () => {
         setSearch(!isSearch)
+        if (isSearch && inpValue) {
+            navigate(`posts/${inpValue}`)
+            setinpValue('')
+        }
     }
 
     const userInfo = useSelector(AuthSelectors.getUserInfo)
@@ -55,6 +59,12 @@ const Header = () => {
         dispatsh(logoutUser())
     }
 
+    const onKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (event.key === 'Enter') {
+            handleSearchOpened()
+        }
+    }
+
     return (
         <div className={classNames(styles.container, { [styles.darkContainer]: themeValue === Theme.Dark })}>
             <div className={styles.header}>
@@ -70,6 +80,7 @@ const Header = () => {
                             placeholder='Search...'
                             onChange={setinpValue}
                             value={inpValue}
+                            onKeyDown={onKeyDown}
                         />
                         <div><Button
                             type={ButtonTypes.Primary}

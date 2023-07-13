@@ -5,6 +5,66 @@
 }
 @import "src/styles/colors.scss";
 
+@mixin smallCard {
+    position: relative;
+    margin-bottom: 82px;
+    &::after {
+        position: absolute;
+        margin-top: 42px;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: $medium;
+    }
+    max-width: 352px;
+    .postWrap {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        .postContainer {
+            max-width: 448px;
+        }
+
+        .postImg {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+        }
+
+        .postDate {
+            font-family: "Inter";
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray;
+            margin-bottom: 8px;
+        }
+
+        .postTitle {
+            font-family: "Inter";
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+            color: $secondary;
+            max-width: 220px;
+            &:hover {
+                cursor: pointer;
+                color: $primary;
+            }
+        }
+    }
+    .iconContainerWrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .likeDislikeContainer,
+    .bookmarkMoreHorizontalContainer {
+        max-width: 100%;
+        display: flex;
+        gap: 33px;
+        align-items: center;
+    }
+}
+
 .large {
     max-width: 736px;
     position: relative;
@@ -135,62 +195,15 @@
     }
 }
 .small {
-    position: relative;
-    margin-bottom: 82px;
-    &::after {
-        position: absolute;
-        margin-top: 42px;
-        content: "";
-        width: 100%;
-        height: 1px;
-        background-color: $medium;
-    }
-    max-width: 352px;
+    @include smallCard();
+}
+.search {
+    @include smallCard();
+    max-width: unset;
     .postWrap {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 25px;
-        .postContainer {
-            max-width: 448px;
-        }
-
-        .postImg {
-            width: 96px;
-            height: 96px;
-            object-fit: cover;
-        }
-
-        .postDate {
-            font-family: "Inter";
-            font-size: 16px;
-            line-height: 24px;
-            color: $gray;
-            margin-bottom: 8px;
-        }
-
-        .postTitle {
-            font-family: "Inter";
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 28px;
-            color: $secondary;
-            max-width: 220px;
-            &:hover {
-                cursor: pointer;
-                color: $primary;
-            }
-        }
-    }
-    .iconContainerWrap {
-        display: flex;
-        justify-content: space-between;
-    }
-    .likeDislikeContainer,
-    .bookmarkMoreHorizontalContainer {
-        max-width: 100%;
-        display: flex;
-        gap: 33px;
-        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: start;
+        gap: 30px;
     }
 }
 

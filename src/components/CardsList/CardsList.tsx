@@ -1,49 +1,23 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { LikeStatus, Post, PostsList, SaveStatus } from 'src/@types';
+import { PostsList, } from 'src/@types';
 import Posts, { PostsTypes } from 'src/components/Posts/Posts';
-import { setLikeStatus, setSavedStatus, setSelectedPost, setSelectedPostModalOpened } from 'src/redux/reducers/postSlice';
-import { setSelectedImage, setSelectedImageModalOpened } from 'src/redux/reducers/imageSlice';
 
 import styles from './CardsList.module.scss'
 import Loader from '../Loader';
+import { useCardActions } from 'src/hooks';
 
 type CardsListProps = {
-    cardsList: PostsList 
+    cardsList: PostsList
 
 }
 
 
 const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
-    const dispatch = useDispatch()
-
-    const onOpenClick = (cardsList: string) => () => {
-        dispatch(setSelectedImageModalOpened(true))
-        dispatch(setSelectedImage(cardsList))
-
-    }
-
-    const onMoreClick = (post: Post) => () => {
-
-        dispatch(setSelectedPostModalOpened(true))
-        dispatch(setSelectedPost(post))
-
-    }
-
-    const onStatusClick = (card: Post) => (status: LikeStatus) => {
-
-        dispatch(setLikeStatus({ card, status }))
+    const { onStatusClick: onClickStatus, onSavedStatus, onMoreClick, onOpenClick } = useCardActions()
 
 
-    }
-    const onSavedStatus = (card: Post) => (status: SaveStatus) => {
-
-        dispatch(setSavedStatus({ card, status }))
-
-
-    }
 
     return cardsList.length ? (
         <div className={styles.cardListcontainer}>
@@ -54,7 +28,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
                     {...cardsList[0]}
                     onMoreClick={onMoreClick(cardsList[0])}
                     onOpenClick={onOpenClick(cardsList[0].image)}
-                    onStatusClick={onStatusClick(cardsList[0])}
+                    onStatusClick={onClickStatus(cardsList[0])}
                     onSavedClick={onSavedStatus(cardsList[0])}
                 />
                 <div className={styles.medium}>
@@ -65,7 +39,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
                                 {...el}
                                 onMoreClick={onMoreClick(el)}
                                 onOpenClick={onOpenClick(el.image)}
-                                onStatusClick={onStatusClick(el)}
+                                onStatusClick={onClickStatus(el)}
                                 onSavedClick={onSavedStatus(el)}
 
                             />
@@ -81,7 +55,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
                             {...el}
                             onMoreClick={onMoreClick(el)}
                             onOpenClick={onOpenClick(el.image)}
-                            onStatusClick={onStatusClick(el)}
+                            onStatusClick={onClickStatus(el)}
                             onSavedClick={onSavedStatus(el)}
 
                         />
@@ -90,8 +64,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
             </div>
         </div>
 
-    )
-        : <Loader />
+    ) : <Loader />
 }
 
 export default CardsList;

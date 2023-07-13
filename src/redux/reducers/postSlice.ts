@@ -14,6 +14,7 @@ type initialState = {
     singlePost: Post | null,
     setSinglePostLoading: boolean,
     myPosts: PostsList,
+    searchedPosts: PostsList,
 
 }
 
@@ -27,6 +28,7 @@ const initialState: initialState = {
     singlePost: null,
     setSinglePostLoading: false,
     myPosts: [],
+    searchedPosts: [],
 };
 const postSlice = createSlice({
 
@@ -59,6 +61,11 @@ const postSlice = createSlice({
         setMyPosts: (state, action: PayloadAction<PostsList>) => {
             state.myPosts = action.payload
         },
+        getSearchedPosts: (_, __: PayloadAction<string>) => { },
+        setSearchedPosts: (state, action: PayloadAction<PostsList>) => {
+            state.searchedPosts = action.payload
+
+        },
 
 
 
@@ -82,7 +89,6 @@ const postSlice = createSlice({
             if (secondaryIndex > -1) {
                 state[secondaryKey].splice(secondaryIndex, 1)
             }
-
         },
         setSavedStatus: (state, action: PayloadAction<{ card: Post, status: SaveStatus }>) => {
             const { card, status } = action.payload;
@@ -95,7 +101,6 @@ const postSlice = createSlice({
                 :
                 state.savedPosts.splice(mainIndex, 1)
         }
-
     },
 })
 
@@ -112,6 +117,8 @@ export const {
     setSinglePostLoading,
     setMyPosts,
     getMyPosts,
+    getSearchedPosts,
+    setSearchedPosts
 } = postSlice.actions
 
 export const PostSelectors = {
@@ -124,7 +131,8 @@ export const PostSelectors = {
     getPostsList: (state: RootState) => state.postReduser.postsList,
     getSinglePost: (state: RootState) => state.postReduser.singlePost,
     getSinglePostLoading: (state: RootState) => state.postReduser.setSinglePostLoading,
-    getMyPosts: (state: RootState) =>  state.postReduser.myPosts 
+    getMyPosts: (state: RootState) => state.postReduser.myPosts,
+    getSearchedPosts: (state: RootState) => state.postReduser.searchedPosts
 }
 
 

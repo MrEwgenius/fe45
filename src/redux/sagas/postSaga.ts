@@ -1,12 +1,12 @@
 import { all, takeLatest, call, put, debounce } from "redux-saga/effects";
 import { ApiResponse } from 'apisauce'
+import { PayloadAction } from "@reduxjs/toolkit";
 
+import { ACCESS_TOKEN_KEY } from "src/utils/constants";
 import API from "src/utils/api";
 
 import { PostsData } from "../@types";
-import { getMyPosts, getPostList, getSinglePost, setMyPosts, setPostsList, setSinglePost, setSinglePostLoading } from "../reducers/postSlice";
-import { PayloadAction } from "@reduxjs/toolkit";
-import { ACCESS_TOKEN_KEY } from "src/utils/constants";
+import { getMyPosts, getPostList, getSearchedPosts, getSinglePost, setMyPosts, setPostsList, setSearchedPosts, setSinglePost, setSinglePostLoading } from "../reducers/postSlice";
 import { callCheckingAuth } from "./helpers/callCheckingAuth";
 
 
@@ -71,11 +71,30 @@ function* getMyPostsWorker() {
 }
 
 
+function* getSearchedPostsWorker(action: PayloadAction<string>) {
+
+    const response: ApiResponse<PostsData> = yield call(
+        API.getPosts,
+        action.payload
+
+    )
+    if (response.data && response.ok) {
+        yield put(setSearchedPosts(response.data.results))
+
+
+    } else {
+        console.log('Searched Posts Error');
+
+    }
+}
+
+
 // перед космосом 
 export default function* postSagaWatcher() {
     yield all([
         takeLatest(getPostList, postWorker),
         takeLatest(getSinglePost, getSinglePostWorker),
         takeLatest(getMyPosts, getMyPostsWorker),
+        takeLatest(getSearchedPosts, getSearchedPostsWorker),
     ])
 }
